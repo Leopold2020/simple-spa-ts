@@ -274,15 +274,15 @@ Statiska sidor är enkla HTML-filer som importeras som strängar.
 
 ---
 
-## Steg 5: Dynamiska Sidor med Lokal State
+## Steg 5: Dynamiska Sidor med lokalt state
 
-Dynamiska sidor skapas med TypeScript-funktioner som returnerar HTMLElement. Vi börjar med **lokal state** - enkelt och perfekt för komponenter som bara behöver state lokalt.
+Dynamiska sidor skapas med TypeScript-funktioner som returnerar HTMLElement. Vi börjar med **lokalt state** - enkelt och perfekt för komponenter som bara behöver state lokalt.
 
-### `src/views/about/index.ts` (med lokal state)
+### `src/views/about/index.ts` (med lokalt state)
 
 ```typescript
 export default function about() {
-  let count = 1; // Lokal state - finns bara i denna funktion
+  let count = 1; // Lokalt state - finns bara i denna funktion
 
   // Skapa huvudcontainern
   const about = document.createElement("div");
@@ -338,11 +338,6 @@ export default function about() {
 - `addEventListener()` - lägger till event handlers
 - Funktionen returnerar ett `HTMLElement` som kan injiceras i DOM:en
 
-**Fördelar med lokal state:**
-- ✅ Enkelt och direkt
-- ✅ Ingen extra kod behövs
-- ✅ Perfekt för isolerad komponent-state
-
 **Nackdelar med lokal state:**
 - ❌ State försvinner när du navigerar bort från sidan
 - ❌ State kan inte delas mellan komponenter
@@ -350,12 +345,11 @@ export default function about() {
 
 **När ska du använda lokal state?**
 - När state bara behövs i en komponent
-- När state inte behöver bevaras vid navigation
 - För enkla, isolerade interaktioner
 
 ---
 
-## Steg 6: Global State med Store-klassen
+## Steg 6: Globalt State med Store-klassen
 
 Om du behöver dela state mellan komponenter eller bevara state vid navigation, kan du använda en **Store-klass** för global state management.
 
@@ -396,7 +390,7 @@ class Store {
 // Skapa en singleton-instans (skapas bara en gång)
 const store = new Store();
 
-// Exportera bound methods så att de alltid refererar till samma store-instans
+> // Exportera bundna metoder så att de alltid använder samma store-instans
 export const getCount = store.getCount.bind(store);
 export const setCount = store.setCount.bind(store);
 export const setRenderCallback = store.setRenderCallback.bind(store);
@@ -405,7 +399,7 @@ export const setRenderCallback = store.setRenderCallback.bind(store);
 **Förklaring:**
 - `Store` är en klass som håller state privat
 - `const store = new Store()` skapas **en gång** när modulen laddas (singleton)
-- Exporterade funktioner är "bound" till store-instansen
+- Exporterade funktioner är bundna till store-instansen
 - `triggerRender()` anropas automatiskt när state ändras
 
 ### Koppla Store till appen: `src/main.ts`
@@ -420,7 +414,7 @@ import { setRenderCallback } from "./lib/store.ts";
 setRenderCallback(renderApp);
 ```
 
-### Använd global state i komponenter: `src/views/about/index.ts`
+### Använd globalt state i komponenter: `src/views/about/index.ts`
 
 ```typescript
 import { getCount, setCount } from "../../lib/store.ts";
@@ -647,24 +641,4 @@ Du har nu byggt en fungerande SPA med:
 ✅ **State Management** - Centraliserad state-hantering  
 ✅ **Styling** - Design system med CSS-variabler  
 
-## 🎯 Nästa steg
 
-- Lägg till fler routes och sidor
-- Skapa återanvändbara komponenter
-- Implementera mer avancerad state management
-- Lägg till formulär och validering
-- Integrera med API:er
-
----
-
-## 💡 Tips
-
-1. **TypeScript-typing:** Använd generiska typer som `querySelector<HTMLButtonElement>()` för bättre type safety
-2. **Event delegation:** Använd `closest()` för att hantera dynamiskt skapade element
-3. **CSS-variabler:** Använd design tokens för konsistent styling
-4. **Modularitet:** Separera statiska och dynamiska sidor för bättre organisation
-
-Lycka till med ditt SPA-projekt! 🎉
-
-# simple-spa-ts
-# simple-spa-ts
