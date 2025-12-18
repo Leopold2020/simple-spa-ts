@@ -1,35 +1,47 @@
-class Store {
-    private state: { count: number };
-    private renderCallback: (() => void) | null;
+import {
+  addPainting,
+  getPaintings as getPaintingsRequest,
+  type Painting,
+} from "./api";
 
-    constructor() {
-      this.state = {
-        count: 1,
-      };
-      this.renderCallback = null;
-    }
-  
-    getCount() {
-      return this.state.count;
-    }
-  
-    setCount(newCount: number) {
-      this.state.count = newCount;
-      this.triggerRender();
-    }
-  
-    setRenderCallback(renderApp: () => void) {
-      this.renderCallback = renderApp;
-    }
-  
-    triggerRender() {
-      if (this.renderCallback) {
-        this.renderCallback();
-      }
+class Store {
+  renderCallback: () => void;
+
+  constructor() {
+    this.renderCallback = () => {};
+  }
+
+  async getPaintings() {
+    try {
+      const paintings = await getPaintingsRequest();
+      return paintings;
+    } catch (error) {
+      return [];
     }
   }
-  const store = new Store();
-  
-  export const getCount = store.getCount.bind(store);
-  export const setCount = store.setCount.bind(store);
-  export const setRenderCallback = store.setRenderCallback.bind(store);
+
+  async setPainting(painting: Painting) {
+    try {
+      await addPainting(painting);
+      this.triggerRender();
+    } catch (error) {
+      console.error("Failed to add painting:", error);
+      throw error;
+    }
+  }
+
+  setRenderCallback(renderApp: () => void) {
+    this.renderCallback = renderApp;
+  }
+
+  triggerRender() {
+    if (this.renderCallback) {
+      this.renderCallback();
+    }
+  }
+}
+const store = new Store();
+
+export const getPaintings = store.getPaintings.bind(store);
+export const setPainting = store.setPainting.bind(store);
+export const setRenderCallback = store.setRenderCallback.bind(store);
