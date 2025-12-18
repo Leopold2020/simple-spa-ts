@@ -9,6 +9,7 @@ import footerHTML from "./views/static/footer/index.html?raw";
 
 
 // Dynamiska sidor
+import paintings from "./views/paintings/paintings.ts";
 import about from "./views/about/index.ts";
 
 
@@ -19,6 +20,8 @@ const currentPage = (): string | HTMLElement => {
       return homeHTML;
     case "/about":
       return about();
+    case "/paintings":
+      return paintings();
     default:
       return "404";
   }

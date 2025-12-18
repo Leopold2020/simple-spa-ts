@@ -1,0 +1,6 @@
+.paintings-page { padding: 1rem; }
+.paintings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.painting-card { border: 1px solid #ddd; padding: 0.5rem; border-radius: 4px; overflow: hidden; background: #fff; }
+.painting-image { width: 100%; height: 180px; object-fit: cover; display: block; }
+.painting-info { padding: 0.5rem 0; }
+.painting-info h3 { margin: 0 0 0.25rem 0; }
