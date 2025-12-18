@@ -1,4 +1,4 @@
-import input from "../components/input";
+import input from "./input";
 import { type Painting } from "../lib/api";
 import { setPainting } from "../lib/store";
 
