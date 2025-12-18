@@ -30,6 +30,7 @@ export default function paintings() {
       const paintings = await getPaintings() as Painting[];
       grid.innerHTML = "";
 
+
       if (!paintings || paintings.length === 0) {
         grid.textContent = "No paintings yet. Add one using the form.";
         return;

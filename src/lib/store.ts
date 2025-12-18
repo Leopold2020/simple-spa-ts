@@ -13,8 +13,15 @@ class Store {
 
   async getPaintings() {
     try {
-      const paintings = await getPaintingsRequest();
-      return paintings;
+      return new Promise<void>(async(resolve, reject) => {
+      await getPaintingsRequest().then(paintings => {
+
+        console.log("test")
+        console.log(paintings)
+        resolve(paintings)
+        // return paintings;
+      })
+    })
     } catch (error) {
       return [];
     }

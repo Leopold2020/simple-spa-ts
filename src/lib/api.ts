@@ -8,8 +8,20 @@ export interface Painting {
 }
 
 const get = async <T>(url: string) => {
-  await get(BASE_URL + url).then(response => {
-    return response
+  return new Promise<void>(async(resolve, reject) => {
+    
+    await window.fetch(BASE_URL + url, {
+      method: 'get',
+      headers: {
+        'content-type': 'application/json;charset=UTF-8'
+      }
+    }).then(async response => {
+      let toSend = await response.json()
+      
+      
+      // console.log(toSend)
+      resolve(toSend)
+    })
   })
 };
 

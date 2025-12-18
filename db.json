@@ -1,3 +1,15 @@
 {
-    "paintings":[]
+  "paintings": [
+    {
+      "id": "a58d",
+      "data": {
+        "name": "test",
+        "description": "a test",
+        "imageUrl": "https://parts.southeasternequip.com/product/test-product/?srsltid=AfmBOookxEXSMNlbfCShpQILFgInhBKDbzpvVL5FtM7sVvf24a9wCb5W",
+        "painter": {
+          "name": "idk"
+        }
+      }
+    }
+  ]
 }
