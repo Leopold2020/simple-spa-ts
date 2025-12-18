@@ -11,7 +11,7 @@ import footerHTML from "./views/static/footer/index.html?raw";
 // Dynamiska sidor
 import paintings from "./views/paintings/paintings.ts";
 import about from "./views/about/index.ts";
-
+import newPainting from "./views/newPainting/newPainting.ts";
 
 const currentPage = (): string | HTMLElement => {
   const path = window.location.pathname;
@@ -20,7 +20,9 @@ const currentPage = (): string | HTMLElement => {
       return homeHTML;
     case "/about":
       return about();
-    case "/paintings":
+      case "/newPainting":
+      return newPainting();
+      case "/paintings":
       return paintings();
     default:
       return "404";
