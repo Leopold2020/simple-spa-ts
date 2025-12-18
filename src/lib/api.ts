@@ -14,7 +14,18 @@ const get = async <T>(url: string) => {
 };
 
 const post = async <T>(url: string, data: T) => {
-  await post(BASE_URL + url, data)
+  console.log(url)
+  await window.fetch(BASE_URL + url, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify({
+      data
+    })
+  }).then(response => {
+    console.log(response)
+  })
 };
 
 export const getPaintings = async () =>
